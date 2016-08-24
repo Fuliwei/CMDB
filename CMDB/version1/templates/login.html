@@ -4,16 +4,12 @@
 <meta charset="utf-8">
 <title>Login</title>
 </head>
+{{mes}}
 <body>
     <form method="post" action="/login">
         <input type="text" name="name" placeholder="username">
         <input type="password" name="password" placeholder="password">
         <input type="submit" value="登陆">
     </form>
-    {% if result %}
-    <div style="color:red">
-        {{result}}
-    </div>
-    {% endif %}
 </body>
 </html>

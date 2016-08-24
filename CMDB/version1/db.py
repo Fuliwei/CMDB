@@ -15,7 +15,7 @@ def check_user(user_dict,fields):
 	res = cur.fetchone() # ===>对应结果为(u'cc', u'123456', u'sa', 1)
 	for k,v in enumerate(fields):
 		result[v] = res[k]
-	print   result
+	return   result
 '''
 	##测试check_user函数的功能
 user_dict = {'password': u'password', 'name': u'cc'}
@@ -24,4 +24,20 @@ fields = ['name','password','role','status']
 #print "*" * 40 
 #print user_dict.values()
 '''
-check_user({'name':'cc'},['name','password','role','status'])
+print check_user({'id':1},['name','password','role','status'])
+
+def getall(fields):
+	result = []
+	sql = 'select %s from users ' %(','.join(fields))
+	cur.execute(sql)
+	res = cur.fetchall()	#===>对应结果为((u'admin', u'sa', 0), (u'cc', u'sa', 0))
+	for x in res:
+		mid = {}
+		for k,v in enumerate(fields):
+			mid[v] = x[k]
+		result.append(mid)
+	return   result
+
+
+#fields = ['name','role','status']
+#getall(fields)

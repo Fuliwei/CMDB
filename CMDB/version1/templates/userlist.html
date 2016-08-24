@@ -1,0 +1,39 @@
+<!userlist html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>userList</title>
+</head>
+{{mes}}
+{{result}}
+<body>
+    <table border='1'>
+        <thead>
+            <tr>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>角色</td>
+                <td>状态</td>
+                <!--<td>操    作</td>-->
+			</tr>
+		</thead>
+		<tbody>
+			{% if result %}
+			{% for re in result %}
+			<tr>
+				<td>{{re.name}}</td>
+				<td>{{re.password}}</td>
+				<td>{{re.role}}</td>
+				{%if re.status == 0%}
+				<td>正常</td>
+				{% else %}
+				<td>锁定</td>
+				{% endif %}
+				<td><a href='/update?id={{re.id}}'><input type="button" name="update" data-id={{re.id}} value="更新"</a>
+				<a href="/delete?id={{re.id}}"><input type="button" name="delete" data-id={{re.id}} value="删除"></td>
+			</tr>
+			{% endfor %}
+			{% endif%}
+		</tbody>
+</body>
+</html>

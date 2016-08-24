@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!update html>  
+{{mes}}
+{{users}}
+
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>userList</title>
+</head>
+<body>
+	<table border='1'>
+	<tr>
+		<td>用户名</td><td class="dataCo1">{{users.name}}</td>
+	</tr>
+	<tr>
+		<td>电话</td><td><input type='text' name='mobile'  value= {{users.mobile}}></td>
+	</tr>
+	<tr>
+		<td>邮箱</td><td><input type='text' name='email'value={{users.email}}></td>
+	</tr>
+	<tr>
+		{%if users.status == 0%}
+		<td>状态</td><td>正常</td>
+		{% else %}
+		<td>状态</td><td>正常</td>
+		{%  endif  %}
+		{%if users.role == 'admin' %}
+	</tr>
+	<tr>
+		<td>角色</td><td>管理员</td>
+		{% else %}
+		<td>角色</td><td>普通用户</td>
+		{%  endif  %}
+	</tr>
+	<form method='POST' action='/update'>
+	<tr>
+	<input type="submit" value="更新">
+	</tr>
+	</form>
+	</table>
+</body>
+</html>
+			
