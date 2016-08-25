@@ -41,27 +41,39 @@ def update():
 	fields = ['name','id','mobile','email','role','status']
 	if request.method == 'GET':
 		id =  request.args.get("id") 
-		print id
 		re = check_user({'id':id},fields)
+		print request.method
 		print re
 		return render_template("update.html",users=re ,mes = {"code":1,"errmsg":"update"})
 	if request.method == 'POST':
 		fields = ['name','mobile','email','role','status']
 		update_info = dict((k,v[0]) for k,v in dict(request.form).items())
-		return render_template("update.html",users={} ,mes = {"code":1,"errmsg":"POST"})
+		print request.method
+		print update_info 
+		result =update_user(update_info)
+		return render_template("update.html",users={} ,mes = result)
 
 
 
 @app.route("/delete")
 def delete():
+	fields = ['name','id','mobile','email','role','status']
 	id =  request.args.get("id") 
 	print id
-	re = check_user({'id':id},fields)
-	print re
-	return render_template("update.html",users=re ,mes = {"code":1,"errmsg":"update"})
+	re = remove(id)
+	return render_template("delete.html",mes = re)
 
-
+@app.route("/useradd",methods=['GET','POST'])
+def useradd():
+	if request.method == 'GET':
+		return render_template("useradd.html",users={},mes = {"code":0,"errmsg":" get page useradd"})
+	if request.method == 'POST':
+		add_info = dict((k,v[0]) for k,v in dict(request.form).items())
+		print add_info  #====>{'mobile': u'zzzzz', 'status': u'zzzz', 'role': u'zzz', 'name': u'zzzz', 'email': u'zzz'}
+		respon = add_user(add_info)
+		return render_template("userlist.html",users=respon,mes = {"code":0,"errmsg":"useradd"})
+	
 
 
 if __name__=='__main__':
-	app.run(host='0.0.0.0',port=2020,debug=True)
+	app.run(host='0.0.0.0',port=2021,debug=True)

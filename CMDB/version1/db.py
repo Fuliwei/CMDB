@@ -23,8 +23,8 @@ fields = ['name','password','role','status']
 #print user_dict.keys()
 #print "*" * 40 
 #print user_dict.values()
+#print check_user({'id':1},['name','password','role','status'])
 '''
-print check_user({'id':1},['name','password','role','status'])
 
 def getall(fields):
 	result = []
@@ -41,3 +41,38 @@ def getall(fields):
 
 #fields = ['name','role','status']
 #getall(fields)
+
+
+def remove(id):
+	sql = 'delete from users where id=%s ' %(id)
+#	print sql
+	cur.execute(sql)
+	result = {'code':0,"errmsg":"delete success"}
+	return  result
+
+
+
+def add_user(respon):
+	sql = "insert into users (%s) values ('%s')" %(','.join(respon.keys()),"','".join(respon.values()))
+	sql = sql +';'
+	#print sql
+	cur.execute(sql)
+	result = {'code':0,"errmsg":"added user success"}
+	return result
+	
+#add_user({'mobile': u'zzzzz', 'status': u'zzzz', 'role': u'zzz', 'name': u'zzzz', 'email': u'zzz'})
+
+
+
+def update_user(respon):
+	data = ["%s='%s'" %(k,v) for k,v in respon.items()]	#==>字典转换为列表,高级用法
+	print data
+	sql = "update users set %s where id='%s';" %(','.join(data),respon["id"])
+	print sql
+	cur.execute(sql)
+	result = {"code":0,"errmsg":"update success"}
+	return result
+
+
+#update_user({'mobile': u'bbbbbb', 'status': 1, 'role': u'zzzzzz', 'name': u'vv', 'email': u'aaa'},["id",8])
+
