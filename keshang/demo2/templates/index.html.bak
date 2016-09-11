@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block breadcrumb %} 
+个人中心
+{% endblock %}
+{% block main %} 
+<table class='table table-bordered'>
+<tr>
+<td style='vertical-align:middle;text-align:center;'><h2>{{user.name}}</h2></td>
+</tr>
+
+{% endblock %}
+
